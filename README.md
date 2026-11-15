@@ -1,11 +1,20 @@
-# 🐍 Python Conditions & Loops — Assessment 1
+<p align="center">
+  <img src="assets/banner.svg" alt="Python Conditions & Loops — Student Scholarship Eligibility and Pharmacy Inventory Management" width="100%">
+</p>
 
-**Practical Python Applications: Student Scholarship Eligibility & Pharmacy Inventory Management**
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Assessment-01-purple" alt="Assessment">
+  <img src="https://img.shields.io/badge/Status-Completed-success" alt="Status">
+  <img src="https://img.shields.io/badge/Level-Beginner-orange" alt="Level">
+</p>
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
-![Assessment](https://img.shields.io/badge/Assessment-01-purple)
-![Status](https://img.shields.io/badge/Status-Completed-success)
-![Level](https://img.shields.io/badge/Level-Beginner-orange)
+<p align="center">
+  <b>Practical Python Applications: Student Scholarship Eligibility & Pharmacy Inventory Management</b><br>
+  <a href="https://syedamaheen05.github.io/python-condition-loops-assessment/">🌐 Live Demo</a> ·
+  <a href="#-installation--execution">⚙️ Run Locally</a> ·
+  <a href="#-author">👩‍💻 Author</a>
+</p>
 
 ---
 
@@ -23,15 +32,12 @@ The assessment demonstrates conditional statements, loops, input validation, exc
 ## 🌐 Live Project Preview
 
 The interactive browser preview brings both project workflows together on one page.
-live demo
 
-**https://syedamaheen05.github.io/python-condition-loops-assessment/**
+**👉 [https://syedamaheen05.github.io/python-condition-loops-assessment/](https://syedamaheen05.github.io/python-condition-loops-assessment/ )**
 
 - 🎓 Scholarship eligibility calculator
 - 💊 Pharmacy sales and inventory simulator
 - Input validation and generated reports
-
-
 
 ---
 
@@ -40,6 +46,8 @@ live demo
 ```text
 python-conditions-loops-assessment/
 │
+├── assets/
+│   └── banner.svg
 ├── student_scholarship_system.py
 ├── pharmacy_inventory_system.py
 ├── index.html
@@ -48,6 +56,7 @@ python-conditions-loops-assessment/
 
 | File | Description |
 |---|---|
+| `assets/banner.svg` | README header banner. |
 | `student_scholarship_system.py` | Evaluates student scholarship eligibility and generates a report. |
 | `pharmacy_inventory_system.py` | Processes medicine sales and generates an inventory and revenue report. |
 | `index.html` | Interactive browser preview for both applications. |
