@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive browser previews of the Python Conditions and Loops Assessment 1 projects.">
+  <title>Python Conditions & Loops | Project Demo</title>
+  <style>
+    :root {
+      --ink: #172033; --muted: #64748b; --line: #e5eaf2; --paper: #ffffff;
+      --bg: #f4f7fb; --blue: #3157d5; --blue-soft: #edf2ff;
+      --teal: #087f78; --teal-soft: #e8f7f5; --red: #b42318;
+      --red-soft: #fff0ee; --amber: #946200; --amber-soft: #fff7df;
+      --shadow: 0 18px 50px rgba(26, 42, 75, .08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    a { color: inherit; }
+    .hero { background: radial-gradient(circle at 85% 10%, #5b7df0 0, transparent 30%), linear-gradient(125deg, #14234b, #263f91 65%, #087f78); color: white; padding: 54px 22px 46px; }
+    .hero-inner, main, footer { max-width: 1080px; margin: auto; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 800; opacity: .8; }
+    h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.08; margin: 14px 0; letter-spacing: -.04em; }
+    .hero p { max-width: 700px; color: #e1e8ff; margin: 0; font-size: 17px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .chip { border: 1px solid #ffffff45; border-radius: 99px; padding: 6px 12px; font-size: 12px; color: #f4f6ff; background: #ffffff12; }
+    main { padding: 28px 22px 54px; }
+    .notice { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--amber); padding: 13px 16px; border-radius: 12px; color: #596273; font-size: 13px; margin-bottom: 22px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+    .tab { border: 1px solid var(--line); background: white; color: var(--muted); border-radius: 11px; padding: 11px 16px; font-weight: 750; cursor: pointer; }
+    .tab[aria-selected="true"] { color: var(--blue); border-color: #b9c8ff; background: var(--blue-soft); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .92fr); gap: 18px; align-items: start; }
+    .card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 23px; }
+    .card h2 { margin: 0 0 5px; font-size: 22px; letter-spacing: -.025em; }
+    .sub { color: var(--muted); margin: 0 0 20px; font-size: 13px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; font-size: 12px; font-weight: 750; color: #45516a; margin-bottom: 6px; }
+    input { width: 100%; border: 1px solid #d8dfeb; background: #fbfcff; border-radius: 10px; padding: 11px 12px; font: inherit; color: var(--ink); outline: none; }
+    input:focus { border-color: #8098f5; box-shadow: 0 0 0 3px #3157d51a; }
+    .actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    button.primary, button.secondary { border: 0; border-radius: 10px; padding: 11px 16px; font: inherit; font-weight: 750; cursor: pointer; }
+    button.primary { color: white; background: var(--blue); }
+    button.secondary { color: #42506a; background: #eef1f6; }
+    button:hover { filter: brightness(.97); }
+    .output { min-height: 260px; background: #101827; border-radius: 13px; padding: 18px; color: #e5edf9; font: 13px/1.75 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .output .placeholder { color: #9aa8bd; }
+    .result-tag { display: inline-block; border-radius: 99px; padding: 4px 9px; font-size: 11px; font-weight: 800; margin: 0 0 12px; }
+    .success { color: var(--teal); background: var(--teal-soft); }
+    .warning { color: var(--amber); background: var(--amber-soft); }
+    .error { color: var(--red); background: var(--red-soft); }
+    .rules { margin: 17px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    .rules li { display: flex; gap: 9px; color: #566176; font-size: 13px; }
+    .rules strong { color: var(--ink); }
+    .inventory-list { margin-top: 16px; display: grid; gap: 10px; }
+    .medicine { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; align-items: end; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+    .medicine .field { min-width: 0; }
+    .medicine input { padding: 9px; font-size: 13px; }
+    .medicine label { font-size: 10px; }
+    .medicine .remove { grid-column: 1/-1; justify-self: end; color: var(--red); background: transparent; border: 0; cursor: pointer; font-weight: 700; }
+    .add-row { margin-top: 12px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 14px; }
+    .stat { border: 1px solid var(--line); background: #fbfcff; border-radius: 12px; padding: 12px; }
+    .stat small { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
+    .stat strong { display: block; font-size: 18px; margin-top: 3px; }
+    footer { padding: 0 22px 35px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } .fields { grid-template-columns: 1fr; } .field.full { grid-column: auto; } .medicine { grid-template-columns: 1fr 1fr; } .stats { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Assessment 01 · Python Fundamentals</div>
+      <h1>Conditions &amp; Loops</h1>
+      <p>Interactive browser previews for two beginner Python applications: scholarship eligibility evaluation and pharmacy inventory &amp; sales management.</p>
+      <div class="chips">
+        <span class="chip">Python concepts</span><span class="chip">Conditional logic</span>
+        <span class="chip">Loops &amp; validation</span><span class="chip">Counters &amp; accumulators</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice"><strong>Demo note:</strong> These are browser-based demonstrations of the project logic. They do not execute the original Python files. Run the <code>.py</code> files from the repository to use the actual Python console applications.</div>
+    <nav class="tabs" aria-label="Project demos">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="scholarship" id="tab-scholarship">🎓 Scholarship System</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="pharmacy" id="tab-pharmacy">💊 Pharmacy System</button>
+    </nav>
+
+    <section class="panel active" id="scholarship" role="tabpanel" aria-labelledby="tab-scholarship">
+      <div class="layout">
+        <div class="card">
+          <h2>Student Scholarship Eligibility</h2>
+          <p class="sub">Enter student details to evaluate eligibility against all three scholarship criteria.</p>
+          <form id="scholarship-form">
+            <div class="fields">
+              <div class="field full"><label for="student-name">Student name</label><input id="student-name" required placeholder="e.g. Ayesha"></div>
+              <div class="field"><label for="marks">Academic marks (%)</label><input id="marks" type="number" min="0" max="100" step="any" required placeholder="0–100"></div>
+              <div class="field"><label for="attendance">Attendance (%)</label><input id="attendance" type="number" min="0" max="100" step="any" required placeholder="0–100"></div>
+              <div class="field full"><label for="income">Monthly family income (Rs.)</label><input id="income" type="number" min="0" step="any" required placeholder="e.g. 40000"></div>
+            </div>
+            <div class="actions"><button class="primary" type="submit">Evaluate Scholarship</button><button class="secondary" type="reset">Reset</button></div>
+          </form>
+          <ul class="rules">
+            <li>✓ <span><strong>Marks:</strong> at least 80%</span></li>
+            <li>✓ <span><strong>Attendance:</strong> at least 85%</span></li>
+            <li>✓ <span><strong>Income:</strong> Rs. 50,000 or less</span></li>
+            <li>★ <span><strong>Full:</strong> 90% marks or above; otherwise Partial when eligible</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Evaluation report</h2>
+          <p class="sub">The result appears here after submission.</p>
+          <div id="scholarship-output" class="output"><span class="placeholder">Waiting for student information…</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="pharmacy" role="tabpanel" aria-labelledby="tab-pharmacy">
+      <div class="layout">
+        <div class="card">
+          <h2>Pharmacy Inventory &amp; Sales</h2>
+          <p class="sub">Add medicine records, then process sales and calculate the pharmacy's daily revenue.</p>
+          <div id="medicine-list" class="inventory-list"></div>
+          <div class="actions add-row">
+            <button class="secondary" id="add-medicine" type="button">＋ Add medicine</button>
+            <button class="primary" id="process-sales" type="button">Process sales</button>
+          </div>
+          <ul class="rules">
+            <li>✓ <span>Sale is completed only when quantity sold is available in stock.</span></li>
+            <li>✓ <span>Revenue includes successful sales only.</span></li>
+            <li>⚠ <span>Remaining stock below 10 units triggers a restocking warning.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Pharmacy sales report</h2>
+          <p class="sub">Sales results, remaining stock, and summary totals.</p>
+          <div class="stats">
+            <div class="stat"><small>Medicines processed</small><strong id="stat-count">0</strong></div>
+            <div class="stat"><small>Total revenue</small><strong id="stat-revenue">Rs. 0</strong></div>
+            <div class="stat"><small>Restock required</small><strong id="stat-restock">0</strong></div>
+          </div>
+          <div id="pharmacy-output" class="output" style="margin-top:14px"><span class="placeholder">Add medicine details and select “Process sales”.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Created as a companion preview for the Python Conditions &amp; Loops Assessment 1 · Syyeda Maheen Bukhari</footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === tab.getAttribute('aria-controls')));
+    }));
+
+    const scholarshipForm = document.getElementById('scholarship-form');
+    const scholarshipOutput = document.getElementById('scholarship-output');
+    scholarshipForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('student-name').value.trim();
+      const marks = Number(document.getElementById('marks').value);
+      const attendance = Number(document.getElementById('attendance').value);
+      const income = Number(document.getElementById('income').value);
+      if (!name || !Number.isFinite(marks) || !Number.isFinite(attendance) || !Number.isFinite(income) ||
+          marks < 0 || marks > 100 || attendance < 0 || attendance > 100 || income < 0) {
+        scholarshipOutput.textContent = 'Invalid input. Enter a student name, marks and attendance between 0 and 100, and a non-negative income.';
+        return;
+      }
+      const reasons = [];
+      if (marks < 80) reasons.push('Academic marks are below 80%.');
+      if (attendance < 85) reasons.push('Attendance is below 85%.');
+      if (income > 50000) reasons.push('Family income exceeds Rs. 50,000.');
+      const eligible = reasons.length === 0;
+      const award = eligible ? (marks >= 90 ? 'Full Scholarship' : 'Partial Scholarship') : 'Not Eligible';
+      const lines = [
+        'SCHOLARSHIP EVALUATION REPORT',
+        '--------------------------------',
+        `Student Name: ${name}`,
+        `Academic Marks: ${marks}%`,
+        `Attendance: ${attendance}%`,
+        `Family Income: Rs. ${income.toLocaleString('en-PK')}`,
+        '',
+        `Scholarship Status: ${eligible ? 'Eligible' : 'Not Eligible'}`,
+        `Scholarship Award: ${award}`
+      ];
+      if (reasons.length) lines.push('', 'Reasons for Ineligibility:', ...reasons.map(reason => `- ${reason}`));
+      scholarshipOutput.textContent = lines.join('\n');
+    });
+    scholarshipForm.addEventListener('reset', () => {
+      scholarshipOutput.innerHTML = '<span class="placeholder">Waiting for student information…</span>';
+    });
+
+    const medicineList = document.getElementById('medicine-list');
+    let medicineId = 0;
+    function addMedicine(name = '', stock = '', price = '', sold = '') {
+      medicineId += 1;
+      const row = document.createElement('div');
+      row.className = 'medicine';
+      row.innerHTML = `
+        <div class="field"><label>Medicine name</label><input class="med-name" required placeholder="e.g. Panadol"></div>
+        <div class="field"><label>Available stock</label><input class="med-stock" type="number" min="0" step="1" required placeholder="Units"></div>
+        <div class="field"><label>Price per unit (Rs.)</label><input class="med-price" type="number" min="0" step="any" required placeholder="Price"></div>
+        <div class="field"><label>Quantity sold</label><input class="med-sold" type="number" min="1" step="1" required placeholder="Units"></div>
+        <button class="remove" type="button" aria-label="Remove medicine">Remove ×</button>`;
+      row.querySelector('.med-name').value = name;
+      row.querySelector('.med-stock').value = stock;
+      row.querySelector('.med-price').value = price;
+      row.querySelector('.med-sold').value = sold;
+      row.querySelector('.remove').addEventListener('click', () => row.remove());
+      medicineList.appendChild(row);
+    }
+    addMedicine('Panadol', 25, 20, 18);
+    addMedicine('Syrup', 30, 100, 10);
+    document.getElementById('add-medicine').addEventListener('click', () => addMedicine());
+
+    document.getElementById('process-sales').addEventListener('click', () => {
+      const rows = [...medicineList.querySelectorAll('.medicine')];
+      const output = document.getElementById('pharmacy-output');
+      if (!rows.length) { output.textContent = 'Add at least one medicine record before processing.'; return; }
+      let revenue = 0, restock = 0;
+      const lines = ['PHARMACY SALES REPORT', '--------------------------------'];
+      let invalid = false;
+      rows.forEach((row, index) => {
+        const name = row.querySelector('.med-name').value.trim();
+        const stockRaw = row.querySelector('.med-stock').value;
+        const priceRaw = row.querySelector('.med-price').value;
+        const soldRaw = row.querySelector('.med-sold').value;
+        const stock = Number(stockRaw), price = Number(priceRaw), sold = Number(soldRaw);
+        if (!name || stockRaw === '' || priceRaw === '' || soldRaw === '' ||
+            !Number.isInteger(stock) || stock < 0 || !Number.isFinite(price) || price < 0 ||
+            !Number.isInteger(sold) || sold <= 0) {
+          lines.push(`\nMedicine ${index + 1}: Invalid information. Check name, stock, price, and quantity sold.`);
+          invalid = true; return;
+        }
+        const successful = sold <= stock;
+        const remaining = successful ? stock - sold : stock;
+        const amount = successful ? sold * price : 0;
+        revenue += amount;
+        lines.push(`\n${name}`);
+        if (successful) lines.push(`Sales amount: Rs. ${amount.toLocaleString('en-PK')}`);
+        else lines.push('Insufficient stock! Sale cannot be completed.');
+        lines.push(`Remaining stock: ${remaining}`);
+        if (remaining < 10) { restock += 1; lines.push(`WARNING: ${name} requires restocking.`); }
+      });
+      lines.push('\n--------------------------------');
+      lines.push(`Total medicines processed: ${rows.length}`);
+      lines.push(`Total pharmacy revenue: Rs. ${revenue.toLocaleString('en-PK')}`);
+      lines.push(`Medicines requiring restocking: ${restock}`);
+      if (invalid) lines.push('\nCorrect invalid medicine details and process again.');
+      output.textContent = lines.join('\n');
+      document.getElementById('stat-count').textContent = rows.length;
+      document.getElementById('stat-revenue').textContent = `Rs. ${revenue.toLocaleString('en-PK')}`;
+      document.getElementById('stat-restock').textContent = restock;
+    });
+  </script>
+</body>
+</html>
