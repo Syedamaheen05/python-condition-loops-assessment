@@ -23,14 +23,15 @@ The assessment demonstrates conditional statements, loops, input validation, exc
 ## 🌐 Live Project Preview
 
 The interactive browser preview brings both project workflows together on one page.
+live demo
 
-**[Open the Project Demo](https://Syedamaheen05.github.io/python-conditions-loops-assessment/)**
+**https://syedamaheen05.github.io/python-condition-loops-assessment/**
 
 - 🎓 Scholarship eligibility calculator
 - 💊 Pharmacy sales and inventory simulator
 - Input validation and generated reports
 
-> **Demo note:** The HTML page is a browser-based simulation of the application logic. It does not execute the original Python source files. Run the `.py` files locally to use the actual console applications. The live link becomes available after GitHub Pages is enabled for this repository.
+
 
 ---
 
